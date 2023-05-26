@@ -1,0 +1,16 @@
+
+#q-details{
+    padding: 10px;
+}
+.question{
+    padding: 5px;
+    box-shadow: 0 0 5px rgba(228, 224, 224, 0.747);
+}
+
+.answer{
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid beige;
+    box-shadow: 0 0 5px rgba(179, 178, 178, 0.626);
+}
+

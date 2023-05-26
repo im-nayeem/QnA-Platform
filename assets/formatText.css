@@ -1,0 +1,75 @@
+.format-box{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    margin: 20px 0;
+    border: 1px solid rgb(244, 239, 239);
+    box-shadow: 0 0 5px rgba(209, 207, 207, 0.5);
+
+}
+.format-box > div{
+    display: flex;
+    flex-direction: column;
+}
+.format-box label{
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 1px;
+}
+.format-box input,.format-box textarea{
+    border: 1px solid rgb(179, 178, 178);
+    padding: 7px;
+}
+.format-box textarea{
+    resize: none;
+}
+
+.format-box .text-box{
+    height: 300px;
+    border: 0.5px solid rgb(166, 165, 165);
+}
+.format-btn > *{
+    padding: 3px;
+    margin: 2px;
+    cursor: pointer;
+}
+
+.format-btn>button:hover{
+    cursor: pointer;
+    border: 1px solid rgb(244, 239, 239);
+    box-shadow: 0 0 5px rgba(157, 155, 155, 0.719);
+    background-color: rgb(206, 207, 209);
+}
+.format-box #preview-btn{
+    padding: 5px;
+}
+.format-box #submit-btn{
+    margin: 10px 0;
+    padding: 10px;
+    float: right;
+    background-color: rgb(22, 121, 44);
+    border-radius: 6%;
+    border: none;
+    color: white;
+}
+.format-box #preview-btn:hover{
+    cursor: pointer;
+    border: 1px solid rgb(244, 239, 239);
+    box-shadow: 0 0 5px rgba(157, 155, 155, 0.719);
+    background-color: rgb(161, 164, 163);
+    color: white;
+}
+.format-box #submit-btn:hover{
+    background-color: rgba(72, 199, 125, 0.775);
+    cursor: pointer;
+ }
+ .format-box #preview-box{
+     overflow-x: scroll;
+     box-shadow: 0 0 2px rgba(144, 143, 141, 0.764);
+     padding: 10px;
+     margin-top: 20px;
+     
+ }
+
+

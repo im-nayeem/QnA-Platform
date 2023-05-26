@@ -1,0 +1,11 @@
+@media only screen and (max-width: 900px) {
+    .float-search {
+        margin-top: 8vh;
+        padding: 10px 10px 0 10px;
+        display: block;
+        width: 100%;
+      }
+    main{
+      margin-top: 10px;
+    }
+}
