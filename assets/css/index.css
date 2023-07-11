@@ -1,3 +1,44 @@
+.add-qn{
+  font-family:Verdana, Geneva, Tahoma, sans-serif;
+  margin: 20px 0;
+  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  border: 0.5 px solid white;
+  box-shadow: 0 0 2px rgba(127, 125, 125, 0.333);
+}
+.qn-btn{
+  color: white;
+  text-decoration: none;
+  padding: 8px;
+  border: 1px solid rgb(236, 234, 234);
+  box-shadow: 0 0 5px rgba(127, 125, 125, 0.5);
+  background-color: hsl(206,100%,52%);
+}
+.qn-btn:hover{
+  cursor: pointer;
+  background-color: hsl(206,100%,40%);
+}
+.questions-list{
+display: flex;
+background-color: aliceblue;
+border: 1px solid cadetblue;
+
+}
+.qn{
+  margin: 5px;
+  padding: 10px;
+  border: 0.5px solid rgb(229, 227, 223);
+  box-shadow: 0 0 2px rgba(149, 147, 147, 0.395);
+}
+.qn a{
+  text-decoration: none;
+  color: black;
+}
+.qn:hover{
+  cursor: pointer;
+  background-color: rgba(204, 220, 214, 0.601);
+}
 @media only screen and (max-width: 900px) {
     .float-search {
         margin-top: 8vh;
