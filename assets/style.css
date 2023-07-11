@@ -119,6 +119,8 @@ main {
     position: fixed;
     left: 0;
     width: 15%;
+    transition: left 0.3s ease; 
+
   }
     nav{
       display: flex;
@@ -253,15 +255,15 @@ footer {
     }
   
     .left-sidebar{
-      position: fixed;
+      position: absolute;
       top: 0;
-      left: 0;
       width: 60%;
       height: 100vh;
       background-color: rgba(255, 255, 255, 0.962);
       z-index: 10;
       display: none;
-      transition: width 10s;
+      transition: 0.8s;
+
     }
     .sidenav-close-btn{
       position: absolute;
@@ -279,6 +281,7 @@ footer {
     }
     nav{
       margin-top: 45px;
+
     }
   }
 
