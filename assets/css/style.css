@@ -147,37 +147,7 @@ main {
     width: 60%;
     padding: 50px 20px;
   }
-    .add-qn{
-        font-family:Verdana, Geneva, Tahoma, sans-serif;
-        margin: 20px 0;
-        padding: 5px;
-        display: flex;
-        justify-content: space-between;
-        border: 0.5 px solid white;
-        box-shadow: 0 0 2px rgba(127, 125, 125, 0.333);
-    }
-    .qn-btn{
-        color: white;
-        text-decoration: none;
-        padding: 8px;
-        border: 1px solid rgb(236, 234, 234);
-        box-shadow: 0 0 5px rgba(127, 125, 125, 0.5);
-        background-color: hsl(206,100%,52%);
-    }
-    .qn-btn:hover{
-        cursor: pointer;
-        background-color: hsl(206,100%,40%);
-    }
-    .questions-list{
-      display: flex;
-      background-color: aliceblue;
-      border: 1px solid cadetblue;
-      
-    }
-    .qn{
-      padding: 5px;
-      margin: 5px;
-    }
+    
   /*-----------------------*/
   .right-sidebar {
     width: 25%;
@@ -197,7 +167,7 @@ footer {
 }
 
 /*----------------------------*/
-.user,.search-icon,.float-search,.sidenav-btn,.sidenav-close-btn{
+.search-icon,.float-search,.sidenav-btn,.sidenav-close-btn{
     display: none;
 }
 
@@ -206,21 +176,9 @@ footer {
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+  text-decoration: underline;
 }
 
-.qn{
-  padding: 10px;
-  border: 0.5px solid rgb(229, 227, 223);
-  box-shadow: 0 0 2px rgba(149, 147, 147, 0.395);
-}
-.qn a{
-  text-decoration: none;
-  color: black;
-}
-.qn:hover{
-  cursor: pointer;
-  background-color: rgba(204, 220, 214, 0.601);
-}
 /*---------------Responsive-------------------*/
 @media only screen and (max-width: 900px) {
 
