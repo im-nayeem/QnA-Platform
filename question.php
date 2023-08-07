@@ -1,3 +1,6 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,7 +17,7 @@
 </head>
 <body>
 
-        <?php require "./includes/header.php";?>
+        <?php require $_SERVER['DOCUMENT_ROOT']."/includes/header.php";?>
 
         <div class="main-content">
 
@@ -104,11 +107,11 @@
             right-sidebar
         </div>
     
-    </main>
+        <script src="assets/js/formatText.js"></script>
 
-    <?php require "./includes/footer.php";?>
 
-    <script src="assets/formatText.js"></script>
+    <?php require $_SERVER['DOCUMENT_ROOT']."/includes/footer.php";?>
+
 
 </body>
 </html>

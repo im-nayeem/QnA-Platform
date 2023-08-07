@@ -1,3 +1,7 @@
+<?php 
+if(!isset($_SESSION)) 
+        session_start();
+?>
 <header>
         <div class="sidenav-btn" id="sidenav-btn">
                 ☰
@@ -19,14 +23,16 @@
               </form>
         </div>
 
-        <div class="account">
-            <a href="login.php">LogIn</a>
-            <a href="signup.php">SignUp</a>
-        </div>
-        
-        <div class="user">
-
-        </div>
+        <?php if(!isset($_SESSION['user'])):?>
+            <div class="account">
+                <a href="/account/login.php">LogIn</a>
+                <a href="/account/signup.php">SignUp</a>
+            </div>
+        <?php else:?>
+            <div class="account">
+                <a href="/account/profile.php">My Account</a>
+            </div>
+        <?php endif;?>
 </header>
 
     <div class="float-search search">
@@ -40,7 +46,7 @@
         <div class="left-sidebar" id="left-sidebar">
             <button class="sidenav-close-btn" id="sidenav-close-btn" onclick="toggleSidebar();">&times;</button>
             <nav>
-                <a href="./">Home</a>
+                <a href="/">Home</a>
                 <a href="all-questions.php">Questions</a>
                 <a href="">Tags</a>
                 <a href="">Users</a>

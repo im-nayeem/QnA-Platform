@@ -1,3 +1,5 @@
+</main>
+
 <footer>
         <div class="help">
             QnA Platform

@@ -1,3 +1,7 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,10 +11,10 @@
     <title>QnA Platform</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/formatText.css">
-
 </head>
 <body>
-        <?php require "./includes/header.php";?>
+
+    <?php require __DIR__."/includes/header.php"; ?> 
         <div class="main-content">
             <h2>Ask Your Question</h2>
 
@@ -51,19 +55,19 @@
     
             </div>
             
-
         </div>
 
         <div class="right-sidebar">
             (right-sidebar)
             <h3>Markdown writing tips: </h3>
         </div>
+
+
+        <script src="assets/js/responsive.js"></script>
+
+        <script src="assets/js/formatText.js"></script>
     
-    </main>
-
-    <?php require "./includes/footer.php";?>
-
-    <script src="assets/js/formatText.js"></script>
+        <?php require $_SERVER['DOCUMENT_ROOT']."/includes/footer.php"; ?> 
 
 </body>
 </html>
