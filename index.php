@@ -1,6 +1,11 @@
 <?php 
 require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
+
+$questionList = getAllQuestionList();
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,23 +30,19 @@ require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
             </div>
 
             <div class="quesions-list">
-                
-                <div class="qn">
-                   
-                    <h3><a href="question.php">How to create a chatbot?</a></h3>
-                   
-                   <div class="user-profile">
-                        <span>By: <a href="">user123</a></span>
-                   </div>
-                </div>
-
-                
-                <div class="qn">
-                    <h3><a href="question.php">Question-2</a></h3>
+                <?php foreach($questionList as $qn): ?>
+                    <div class="qn">
+                    
+                    <h3><a href="question-view.php?qid=<?=$qn->getQid();?>"> <?= $qn->getTitle(); ?> </a></h3>
+                    
                     <div class="user-profile">
-                        <span>By: <a href="">user102</a></span>
-                   </div>
-                </div>
+                            <span>By: <a href="/user-profile.php?uid=<?=$qn->getAuthor()->getUserId(); ?>">
+                                <?= $qn->getAuthor()->getFirstName(); ?>
+                            </a></span>
+                    </div>
+
+                    </div>
+                <?php endforeach;?>
             </div>
             
         </div>

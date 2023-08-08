@@ -53,7 +53,7 @@ class Question{
         //     log_error($temp->getText());
     }
 
-    /* ------- Getters(public) -----------------*/
+    /* ------- Getters(public) ----------------- */
     
     function getTitle(){
         return $this->title;

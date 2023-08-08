@@ -1,1 +1,24 @@
-]
+]MongoDB\Driver\Exception\ConnectionTimeoutException: No suitable servers found (`serverSelectionTryOnce` set): [Failed to resolve 'ac-j2iepm7-shard-00-00.sibz9kw.mongodb.net'] [Failed to resolve 'ac-j2iepm7-shard-00-01.sibz9kw.mongodb.net'] [Failed to resolve 'ac-j2iepm7-shard-00-02.sibz9kw.mongodb.net'] in N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\functions.php:487
+Stack trace:
+#0 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\functions.php(487): MongoDB\Driver\Manager->selectServer(Object(MongoDB\Driver\ReadPreference))
+#1 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\Collection.php(639): MongoDB\select_server(Object(MongoDB\Driver\Manager), Array)
+#2 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\utility.php(15): MongoDB\Collection->find()
+#3 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\index.php(6): getAllQuestionList()
+#4 {main}
+
+MongoDB\Driver\Exception\ConnectionTimeoutException: No suitable servers found (`serverSelectionTryOnce` set): [Failed to resolve 'ac-j2iepm7-shard-00-00.sibz9kw.mongodb.net'] [Failed to resolve 'ac-j2iepm7-shard-00-01.sibz9kw.mongodb.net'] [Failed to resolve 'ac-j2iepm7-shard-00-02.sibz9kw.mongodb.net'] in N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\functions.php:487
+Stack trace:
+#0 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\functions.php(487): MongoDB\Driver\Manager->selectServer(Object(MongoDB\Driver\ReadPreference))
+#1 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\Collection.php(639): MongoDB\select_server(Object(MongoDB\Driver\Manager), Array)
+#2 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\utility.php(15): MongoDB\Collection->find()
+#3 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\index.php(6): getAllQuestionList()
+#4 {main}
+
+MongoDB\Driver\Exception\ConnectionTimeoutException: No suitable servers found (`serverSelectionTryOnce` set): [Failed to resolve 'ac-j2iepm7-shard-00-00.sibz9kw.mongodb.net'] [Failed to resolve 'ac-j2iepm7-shard-00-01.sibz9kw.mongodb.net'] [Failed to resolve 'ac-j2iepm7-shard-00-02.sibz9kw.mongodb.net'] in N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\functions.php:487
+Stack trace:
+#0 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\functions.php(487): MongoDB\Driver\Manager->selectServer(Object(MongoDB\Driver\ReadPreference))
+#1 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\vendor\mongodb\mongodb\src\Collection.php(639): MongoDB\select_server(Object(MongoDB\Driver\Manager), Array)
+#2 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\utility.php(15): MongoDB\Collection->find()
+#3 N:\QNA Platform\QNA Platform - PHP-JS-HTML-CSS\index.php(6): getAllQuestionList()
+#4 {main}
+
