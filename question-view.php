@@ -3,16 +3,20 @@ require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/db.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/qnAnswer.php";
+
 
 if(!isset($_SESSION))
     session_start();
 
 $question = null;
+$answerList = [];
 if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
 {
     try{
         $qid = $_GET['qid'];
         $question = new Question($qid);
+        $answerList = $question->getAnswerList();
     }catch(Exception $e){
         log_error($e);
     }
@@ -59,27 +63,23 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
             <hr>
 
             <div class="answer-list">
+
                 <div class="add-ans">
                     <span><strong><u>Answers:</u></strong></span>
                     <a class="ans-btn" href="#answer-box">Answer This</a>
                 </div>
                 
-                <div class="answer">
-                    Creating a chatbot involves several steps and requires a combination of programming skills, natural language processing (NLP) knowledge, and understanding of the problem domain. 
-                    <div class="user-profile">
-                        <span>By: <a href="">user345</a></span>
+                <?php foreach($answerList as $ans): ?>
+                    <div class="answer">
+                        <?= $ans->getText(); ?>
+                        <div class="user-profile">
+                            <span>By: <a href="/user-profile.php?uid=<?= $ans->getAuthor()->getUserId(); ?>">
+                                <?= $ans->getAuthor()->getFirstName(); ?></a></span>
+                        </div>
                     </div>
-                </div>
-                <div class="answer">
-                    Prerequisites for creating a chatbot:
-                    <br>
-                    1. Programming Knowledge: You'll need programming skills to develop a chatbot. Proficiency in languages such as Python, JavaScript, or Java can be beneficial.
-                    <br>
-                    2. Natural Language Processing (NLP): Familiarity with NLP concepts, such as tokenization, part-of-speech tagging, and sentiment analysis, will help in processing and understanding user inputs.
-                    <div class="user-profile">
-                        <span>By: <a href="">user789</a></span>
-                    </div>
-                </div>
+                <?php endforeach; ?>
+                
+
             </div>
 
             <div id="answer-box">
@@ -110,7 +110,8 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
                     
                     </div>
         
-                    <form action="/.php" method="POST">
+                    <form action="/postAnswer.php" method="POST">
+                        <input type="text" name="qid" value="<?= $question->getQid(); ?>" hidden>
                         <textarea class="text-box" id="details" name="details" required hidden></textarea>
                         <button type="submit" id="submit-btn" style="display: none;">Submit</button>
                     </form>

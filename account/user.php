@@ -33,7 +33,7 @@ class User{
 /* ----------------------- Methods ------------------------------ */
 
     // retrive user info from DB using user's object id
-    function __construct1($uid)
+    private function __construct1($uid)
     {
         try{
             global $db;
@@ -54,7 +54,7 @@ class User{
         }
     }
     // retrieve user information from google account using access token gotten by auth
-    function __construct2($access_token, $google_client)
+    private function __construct2($access_token, $google_client)
     {
         try{
             $google_client->setAccessToken($access_token);
@@ -98,7 +98,7 @@ class User{
         }
     }
 
-/* ----------------- Getters ---------------- */
+/* ----------------- Getters(Public) ---------------- */
 
     function getFirstName(){
         return $this->firstName;
