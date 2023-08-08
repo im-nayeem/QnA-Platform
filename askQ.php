@@ -14,7 +14,7 @@ require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
 </head>
 <body>
 
-    <?php require __DIR__."/includes/header.php"; ?> 
+    <?php require $_SERVER['DOCUMENT_ROOT']."/includes/header.php"; ?> 
         <div class="main-content">
             <h2>Ask Your Question</h2>
 
@@ -23,8 +23,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
                 <label for="question-title">Title</label>
                 <input type="text" id="question-title" name="question-title" required>
                 
-                <label for="question-details">Question Details</label>
-               
+                <label for="text-box">Question Details</label>
+               <!-- common text-box for markdown formatting -->
                 <div class="text-box">
                     <div class="format-btn">
                         <button onclick="formatText('bold')">Bold</button>
@@ -35,7 +35,6 @@ require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
                         <button onclick="formatText('space')">Space</button>
                         <button onclick="formatText('snippet')">Code</button>
                         <button onclick="formatText('code')">Code(Multi-Line)</button>
-                        
                     </div>
                    
                     <textarea class="text-box" id="text-box" name="text-box" required></textarea>
@@ -49,7 +48,9 @@ require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
                 
                 </div>
     
-                <form action="" method="GET">
+                <form action="/postQuestion.php" method="POST">
+                    <input type="text" name="title" id="title" required hidden>
+                    <textarea class="text-box" id="details" name="details" required hidden></textarea>
                     <button type="submit" id="submit-btn" style="display: none;">Submit</button>
                 </form>
     
@@ -63,11 +64,11 @@ require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
         </div>
 
 
-        <script src="assets/js/responsive.js"></script>
 
-        <script src="assets/js/formatText.js"></script>
     
         <?php require $_SERVER['DOCUMENT_ROOT']."/includes/footer.php"; ?> 
+        
+        <script src="assets/js/formatText.js"></script>
 
 </body>
 </html>

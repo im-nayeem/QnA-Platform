@@ -5,18 +5,58 @@ use MongoDB\Operation\InsertOne;
 
 require_once $_SERVER["DOCUMENT_ROOT"]."/account/auth-config.php";
 require_once $_SERVER["DOCUMENT_ROOT"]."/db.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/utility.php";
 
 class User{
+
     private $firstName = null;
     private $lastName = null;
     private $photo = null;
     private $email = null;
-    private $user_info = null;
-    private $userName = null;
+    private $userId = null;
 
-    function __construct($access_token){
+
+    function __construct() {
         try {
-            global $google_client;
+            $arguments = func_get_args();
+            $numberOfArguments = func_num_args();
+            if(method_exists($this, $function = '__construct'.$numberOfArguments)) 
+            {
+                call_user_func_array(array($this, $function), $arguments);
+            }
+        } catch (Exception $e) {
+            log_error($e);
+        }
+    }
+
+
+/* ----------------------- Methods ------------------------------ */
+
+    // retrive user info from DB using user's object id
+    function __construct1($uid)
+    {
+        try{
+            global $db;
+            $collections = $db->users;
+            $user_info = $collections->findOne([
+                '_id' => new MongoDB\BSON\ObjectId($uid)
+            ]);
+
+            $this->firstName = $user_info['first_name'];
+            $this->lastName = $user_info['last_name'];
+            $this->photo = $user_info['photo'];
+            $this->email = $user_info['email'];
+            $this->userId = $user_info['_id'];
+            
+
+        }catch(Exception $e){
+            log_error($e);
+        }
+    }
+    // retrieve user information from google account using access token gotten by auth
+    function __construct2($access_token, $google_client)
+    {
+        try{
             $google_client->setAccessToken($access_token);
             $google_oauth = new Google_Service_Oauth2($google_client);
             $user_info = $google_oauth->userinfo->get();
@@ -25,37 +65,40 @@ class User{
             $this->lastName = $user_info['familyName'];
             $this->photo = $user_info['picture'];
             $this->email = $user_info['email'];
-            $this->userName = explode('@',$this->email)[0];
 
             $google_client->revokeToken();
 
-            $this->checkUser();
+            $this->checkUserInDB();
 
-        } catch (Exception $e) {
-            error_log("Error! ".$e."\n");
+        }catch(Exception $e){
+            log_error($e);
         }
     }
-    private function checkUser(){
-        try{
-            global $db_client;
-            $collections = $db_client->qna->users;
-            $document = $collections->FindOne(["email" => $this->email]);
-            if($document == null)
+
+    // check if user info is available in DB, if not(new user) then store user info
+    private function checkUserInDB() {
+        try {
+            global $db;
+            $collections = $db->users;
+            $userDocument = $collections->FindOne(["email" => $this->email]);
+            if($userDocument == null)
             {
-                $insertedResult = $collections->InsertOne([
+                $collections->InsertOne([
                     'first_name' => $this->firstName,
                     'last_name' => $this->lastName,
                     'email' => $this->email,
                     'photo' => $this->photo,
-                    'username' => $this->userName
                 ]); 
-                echo "<script> alert(".$insertedResult->getInsertedId().");</script>";
+                $userDocument = $collections->FindOne(["email" => $this->email]);
             }
+            $this->userId = $userDocument['_id'];
         }
-        catch(Exception $e){
+        catch(Exception $e) {
             error_log($e."\n");
         }
     }
+
+/* ----------------- Getters ---------------- */
 
     function getFirstName(){
         return $this->firstName;
@@ -69,11 +112,8 @@ class User{
     function getEmail(){
         return $this->email;
     }
-    function getUserInfo(){
-        return $this->user_info;
-    }
-    function getUserName(){
-        return $this->userName;
+    function getUserId(){
+        return $this->userId;
     }
 }
 ?>

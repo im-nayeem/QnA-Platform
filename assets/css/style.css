@@ -61,6 +61,7 @@ header>*{
     .search-input {
         width: 100%;
         padding: 5px;
+        font-size: 15px;
     }
 
     .search-button {
@@ -144,13 +145,13 @@ main {
     }
   
   .main-content {
-    width: 60%;
+    width: 65%;
     padding: 50px 20px;
   }
     
   /*-----------------------*/
   .right-sidebar {
-    width: 25%;
+    width: 20%;
   }
   
 /*-----------------------------*/
@@ -171,7 +172,7 @@ footer {
     display: none;
 }
 
-.user-profile{
+.user-profile {
   display: flex;
   flex-direction: row;
   align-items: flex-end;
@@ -180,7 +181,7 @@ footer {
 }
 
 /*---------------Responsive-------------------*/
-@media only screen and (max-width: 900px) {
+@media only screen and (max-width: 640px) {
 
   .account{
     align-content: flex-end;

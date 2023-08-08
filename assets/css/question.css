@@ -6,11 +6,27 @@
     padding: 5px;
     box-shadow: 0 0 5px rgba(228, 224, 224, 0.747);
 }
-
+.question ul, .question ol,.answer ul, .answer ol{
+    margin-left: 15px;
+}
 .answer{
     padding: 10px;
     margin: 10px 0;
     border: 1px solid beige;
     box-shadow: 0 0 5px rgba(179, 178, 178, 0.626);
+}
+.ans-btn {
+    color: white;
+    text-decoration: none;
+    padding: 8px;
+    border: 1px solid rgb(236, 234, 234);
+    box-shadow: 0 0 5px rgba(127, 125, 125, 0.5);
+    background-color: hsl(206,100%,52%);
+}
+.add-ans{
+    /* margin-top: 5px; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
