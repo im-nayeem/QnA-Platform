@@ -25,4 +25,14 @@ function getAllQuestionList(){
     }
 }
 
+
+function getTime(){
+    date_default_timezone_set("UTC");
+    return  date("Y-m-d H:i a");
+}
+
+function convertUTCToLocal($time){
+    echo "<script>getTime('$time');</script>";
+}
+
 ?>

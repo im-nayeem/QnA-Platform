@@ -29,4 +29,9 @@
     align-items: center;
     justify-content: space-between;
 }
-
+.paragraph-footer{
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+  }

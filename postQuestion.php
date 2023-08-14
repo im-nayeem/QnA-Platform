@@ -18,7 +18,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST))
             'details' => $details,
             'uid' => $user->getUserId()
         ]);
-        $page = "/question.php?id=".$insertedResutlt->getInsertedId();
+        $page = "/question-view.php?id=".$insertedResutlt->getInsertedId();
         header("Location: ".$page);
     }
     catch(Exception $e){

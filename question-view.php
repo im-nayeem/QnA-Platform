@@ -53,11 +53,15 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
                 <div id="q-details">
                     <?= $question->getDetails(); ?>
                 </div>
-
-                <div class="user-profile">
-                    <span>Posted By: <a href="/user-profile.php?uid=<?=$question->getAuthor()->getUserId();?>">
-                            <?= $question->getAuthor()->getFirstName(); ?>
-                        </a></span>
+                <div class="paragraph-footer">
+                    <div class="time">
+                        Timestamp
+                    </div>
+                    <div class="user-profile">
+                        <span>Posted By: <a href="/user-profile.php?uid=<?=$question->getAuthor()->getUserId();?>">
+                                <?= $question->getAuthor()->getFirstName(); ?>
+                            </a></span>
+                    </div>
                 </div>
             </div>
             <hr>
@@ -72,9 +76,14 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
                 <?php foreach($answerList as $ans): ?>
                     <div class="answer">
                         <?= $ans->getText(); ?>
-                        <div class="user-profile">
-                            <span>By: <a href="/user-profile.php?uid=<?= $ans->getAuthor()->getUserId(); ?>">
-                                <?= $ans->getAuthor()->getFirstName(); ?></a></span>
+                        <div class="paragraph-footer">
+                            <div class="time">
+                                Timestamp
+                            </div>
+                            <div class="user-profile">
+                                <span>By: <a href="/user-profile.php?uid=<?= $ans->getAuthor()->getUserId(); ?>">
+                                    <?= $ans->getAuthor()->getFirstName(); ?></a></span>
+                            </div>
                         </div>
                     </div>
                 <?php endforeach; ?>
@@ -129,7 +138,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
             right-sidebar
         </div>
     
-        <script src="assets/js/formatText.js"></script>
+        <script src="/assets/js/formatText.js"></script>
 
 
     <?php require $_SERVER['DOCUMENT_ROOT']."/includes/footer.php";?>

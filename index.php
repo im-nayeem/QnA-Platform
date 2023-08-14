@@ -48,7 +48,7 @@ $questionList = getAllQuestionList();
         </div>
 
         <div class="right-sidebar">
-            right-sidebar
+            right-sidebar-contents
         </div>
     
 
