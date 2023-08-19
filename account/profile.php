@@ -1,14 +1,13 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/filter/login-filter.php";
-require_once $_SERVER["DOCUMENT_ROOT"]."/account/user.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/account/model/user.php";
 
 $user = unserialize($_SESSION['user']);
 
 $user_info['picture'] = $user->getPhoto();
 $user_info['email'] = $user->getEmail();
 $user_info['name'] = $user->getFirstName()." ".$user->getLastName();
-$user_info['username'] = $user->getUserName();
-
+$user_info['userId'] = $user->getUserId();
 ?>
 
 <!DOCTYPE html>
@@ -35,7 +34,7 @@ $user_info['username'] = $user->getUserName();
     <li><img src="<?=$user_info['picture'];?>"></li>
     <li><strong>Full Name:</strong> <?=$user_info['name'];?> </li>
     <li><strong>Email:</strong> <?=$user_info['email'];?></li>
-    <li><strong>Username:</strong> <?=$user_info['username'];?></li>
+    <li><strong>UserId:</strong> <?=$user_info['userId'];?></li>
 
     <li><a href="logout.php">Logout</a></li>
   </ul>

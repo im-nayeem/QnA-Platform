@@ -1,6 +1,28 @@
-<?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
+<?php
+require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/db.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/qnAnswer.php";
+
+
+if(!isset($_SESSION))
+    session_start();
+
+$question = null;
+$answerList = [];
+if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
+{
+    try{
+        $qid = $_GET['qid'];
+        $question = new Question($qid);
+        $answerList = $question->getAnswerList();
+    }catch(Exception $e){
+        log_error($e);
+    }
+}
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,60 +34,69 @@ require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/formatText.css">
     <link rel="stylesheet" href="assets/css/question.css">
-
+    <script src="/assets/js/timeConverter.js"></script>
 
 </head>
+
 <body>
 
         <?php require $_SERVER['DOCUMENT_ROOT']."/includes/header.php";?>
 
         <div class="main-content">
-
             <div class="question">
+                
                 <div id="q-title">
-                    <h2>How to create a chatbot?</h2>
+                    <h2><?= $question->getTitle(); ?></h2>
                 </div>
+
                 <hr>
+
                 <div id="q-details">
-                    What are the procedures to create chatbot?<br>
-                    Where to get started?<br>
-                    What are prerequisites?
+                    <?= $question->getDetails(); ?>
                 </div>
-                <div class="user-profile">
-                    <span>By: <a href="">user123</a></span>
+                <div class="paragraph-footer">
+                    <div class="time">
+                        <?php convertUTCToLocal($question->getTimestamp());?>
+                    </div>
+                    <div class="user-profile">
+                        <span>Posted By: <a href="/user-profile.php?uid=<?=$question->getAuthor()->getUserId();?>">
+                                <?= $question->getAuthor()->getFirstName(); ?>
+                            </a></span>
+                    </div>
                 </div>
             </div>
             <hr>
 
             <div class="answer-list">
-                <div class="add-qn">
+
+                <div class="add-ans">
                     <span><strong><u>Answers:</u></strong></span>
-                    <a class="qn-btn" href="#answer-box">Answer This</a>
+                    <a class="ans-btn" href="#answer-box">Answer This</a>
                 </div>
                 
-                <div class="answer">
-                    Creating a chatbot involves several steps and requires a combination of programming skills, natural language processing (NLP) knowledge, and understanding of the problem domain. 
-                    <div class="user-profile">
-                        <span>By: <a href="">user345</a></span>
+                <?php foreach($answerList as $ans): ?>
+                    <div class="answer" id="<?=$ans->getAid();?>">
+                        <?= $ans->getText(); ?>
+                        <div class="paragraph-footer">
+                            <div class="time">
+                            <?php convertUTCToLocal($ans->getTimestamp());?>
+                            </div>
+                            <div class="user-profile">
+                                <span>By: <a href="/user-profile.php?uid=<?= $ans->getAuthor()->getUserId(); ?>">
+                                    <?= $ans->getAuthor()->getFirstName(); ?></a></span>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="answer">
-                    Prerequisites for creating a chatbot:
-                    <br>
-                    1. Programming Knowledge: You'll need programming skills to develop a chatbot. Proficiency in languages such as Python, JavaScript, or Java can be beneficial.
-                    <br>
-                    2. Natural Language Processing (NLP): Familiarity with NLP concepts, such as tokenization, part-of-speech tagging, and sentiment analysis, will help in processing and understanding user inputs.
-                    <div class="user-profile">
-                        <span>By: <a href="">user789</a></span>
-                    </div>
-                </div>
+                <?php endforeach; ?>
+                
+
             </div>
 
             <div id="answer-box">
                 <div class="format-box">
-                
+
                     <label for="text-box">Your Answer</label>
-                   
+                <!-- common text-box for markdown formatting -->
                     <div class="text-box">
                         <div class="format-btn">
                             <button onclick="formatText('bold')">Bold</button>
@@ -76,12 +107,12 @@ require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
                             <button onclick="formatText('space')">Space</button>
                             <button onclick="formatText('snippet')">Code</button>
                             <button onclick="formatText('code')">Code(Multi-Line)</button>
-                            
                         </div>
-                       
+                    
                         <textarea class="text-box" id="text-box" name="text-box" required></textarea>
                         
                     </div>
+
                     
                     <button onclick="convertToHTML()" id="preview-btn">Preview</button>
                     
@@ -89,25 +120,21 @@ require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
                     
                     </div>
         
-                    <form action="" method="GET">
+                    <form action="/postAnswer.php" method="POST">
+                        <input type="text" name="qid" value="<?= $question->getQid(); ?>" hidden>
+                        <textarea class="text-box" id="details" name="details" required hidden></textarea>
                         <button type="submit" id="submit-btn" style="display: none;">Submit</button>
                     </form>
         
                 </div>
-                
             </div>
-
-            <div id="answers">
-
-            </div>
-
         </div>
 
         <div class="right-sidebar">
             right-sidebar
         </div>
     
-        <script src="assets/js/formatText.js"></script>
+        <script src="/assets/js/formatText.js"></script>
 
 
     <?php require $_SERVER['DOCUMENT_ROOT']."/includes/footer.php";?>

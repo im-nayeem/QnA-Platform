@@ -69,7 +69,9 @@
      box-shadow: 0 0 2px rgba(144, 143, 141, 0.764);
      padding: 10px;
      margin-top: 20px;
-     
+ }
+ #preview-box ul,#preview-box ol{
+    margin-left: 15px;
  }
 
 

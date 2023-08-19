@@ -1,6 +1,5 @@
-
 var script = document.createElement('script');
-script.src = 'https://cdn.jsdelivr.net/npm/showdown@1.9.1/dist/showdown.min.js';
+script.src="https://cdn.jsdelivr.net/npm/marked@3.0.0/marked.min.js";
 document.head.appendChild(script);
 
 /**
@@ -24,7 +23,8 @@ document.head.appendChild(script);
         selectedText = `> ${selectedText}`;
         break;
       case 'list':
-        selectedText = `- ${selectedText}`;
+        const lines = selectedText.split('\n');
+        selectedText = lines.map(line => `- ${line}`).join('\n');
         break;
       case 'space':
         selectedText = ` ${selectedText}`;
@@ -43,6 +43,7 @@ document.head.appendChild(script);
     }
 
     textarea.value = textarea.value.substring(0, start) + selectedText + textarea.value.substring(end);
+    updateHiddenDetails();
   }
 
   /**
@@ -50,18 +51,33 @@ document.head.appendChild(script);
    */
   function convertToHTML() {
     const markdownText = document.getElementById('text-box').value;
-    const converter = new showdown.Converter();
-    const html = converter.makeHtml(markdownText);
+    const html = marked(markdownText);
 
     const previewBox = document.getElementById('preview-box');
-    if(document.getElementById('question-title')!=null)
+    if(document.getElementById('question-title') != null)
         previewBox.innerHTML = "<h2>"+document.getElementById('question-title').value+"</h2>"+ html;
     else
         previewBox.innerHTML =  html;
-      
-  
-  
+    
     document.getElementById('submit-btn').style.display='block';
   }
 
+
+  const titleInput = document.getElementById('question-title');
+  const textareaInput = document.getElementById('text-box');
+  const hiddenTitleInput = document.getElementById('title');
+  const hiddenDetailsInput = document.getElementById('details');
+
+  if(titleInput != null)
+    titleInput.addEventListener('keyup', updateHiddenTitle);
+  textareaInput.addEventListener('keyup', updateHiddenDetails);
+
+  function updateHiddenTitle() {
+    if(titleInput != null)
+      hiddenTitleInput.value = marked(titleInput.value);
+  }
+
+  function updateHiddenDetails() {
+      hiddenDetailsInput.value = marked(textareaInput.value);
+  }
 

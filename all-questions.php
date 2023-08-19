@@ -1,3 +1,11 @@
+<?php 
+require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
+
+$questionList = getAllQuestionList();
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -23,25 +31,25 @@
                 </div>
                 
             <div id="q-list">
-
-                <div class="question">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
+            <?php foreach($questionList as $qn): ?>
+                <div class="question q">
+                    
+                    <h3><a href="question-view.php?qid=<?=$qn->getQid();?>"> <?= $qn->getTitle(); ?> </a></h3>
+                    
                     <div class="user-profile">
+                            <span>By: <a href="/user-profile.php?uid=<?=$qn->getAuthor()->getUserId(); ?>">
+                                <?= $qn->getAuthor()->getFirstName(); ?>
+                            </a></span>
+                    </div>
 
                     </div>
-                </div>
-
-                <div class="question">
-                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. </h3>
-                    <div class="user-profile">
-
-                    </div>
-                </div>
+                <?php endforeach;?>
+               
 
             </div>
 
         <div class="right-sidebar">
-            right-sidebar
+            <!-- right-sidebar -->
         </div>
     
     </main>
