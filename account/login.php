@@ -1,6 +1,6 @@
 <?php
 require_once($_SERVER["DOCUMENT_ROOT"]."/account/auth-config.php");
-require_once($_SERVER["DOCUMENT_ROOT"]."/account/user.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/account/model/user.php");
 
 if(!isset($_SESSION)) 
         session_start();

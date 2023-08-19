@@ -1,5 +1,5 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/filter/login-filter.php";
 ?>
 <!DOCTYPE html>

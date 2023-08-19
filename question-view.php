@@ -1,9 +1,9 @@
 <?php
 require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/db.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/question.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/qnAnswer.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/qnAnswer.php";
 
 
 if(!isset($_SESSION))
@@ -20,9 +20,9 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
     }catch(Exception $e){
         log_error($e);
     }
-    
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,9 +34,10 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/formatText.css">
     <link rel="stylesheet" href="assets/css/question.css">
-
+    <script src="/assets/js/timeConverter.js"></script>
 
 </head>
+
 <body>
 
         <?php require $_SERVER['DOCUMENT_ROOT']."/includes/header.php";?>
@@ -55,7 +56,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
                 </div>
                 <div class="paragraph-footer">
                     <div class="time">
-                        Timestamp
+                        <?php convertUTCToLocal($question->getTimestamp());?>
                     </div>
                     <div class="user-profile">
                         <span>Posted By: <a href="/user-profile.php?uid=<?=$question->getAuthor()->getUserId();?>">
@@ -74,11 +75,11 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
                 </div>
                 
                 <?php foreach($answerList as $ans): ?>
-                    <div class="answer">
+                    <div class="answer" id="<?=$ans->getAid();?>">
                         <?= $ans->getText(); ?>
                         <div class="paragraph-footer">
                             <div class="time">
-                                Timestamp
+                            <?php convertUTCToLocal($ans->getTimestamp());?>
                             </div>
                             <div class="user-profile">
                                 <span>By: <a href="/user-profile.php?uid=<?= $ans->getAuthor()->getUserId(); ?>">
@@ -127,11 +128,6 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
         
                 </div>
             </div>
-
-            <!-- <div id="answers">
-
-            </div> -->
-
         </div>
 
         <div class="right-sidebar">

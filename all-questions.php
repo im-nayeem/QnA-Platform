@@ -1,6 +1,6 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
 
 $questionList = getAllQuestionList();

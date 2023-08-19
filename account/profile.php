@@ -1,6 +1,6 @@
 <?php
 require_once $_SERVER["DOCUMENT_ROOT"]."/filter/login-filter.php";
-require_once $_SERVER["DOCUMENT_ROOT"]."/account/user.php";
+require_once $_SERVER["DOCUMENT_ROOT"]."/account/model/user.php";
 
 $user = unserialize($_SESSION['user']);
 

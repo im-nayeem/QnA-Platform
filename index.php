@@ -1,6 +1,6 @@
 <?php 
-require_once $_SERVER['DOCUMENT_ROOT']."/account/user.php";
-require_once $_SERVER['DOCUMENT_ROOT']."/question.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
+require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
 
 $questionList = getAllQuestionList();
@@ -32,15 +32,14 @@ $questionList = getAllQuestionList();
             <div class="quesions-list">
                 <?php foreach($questionList as $qn): ?>
                     <div class="qn">
-                    
-                    <h3><a href="question-view.php?qid=<?=$qn->getQid();?>"> <?= $qn->getTitle(); ?> </a></h3>
-                    
-                    <div class="user-profile">
+                        <h3>
+                            <a href="question-view.php?qid=<?=$qn->getQid();?>"> <?= $qn->getTitle(); ?> </a>
+                        </h3>
+                        <div class="user-profile">
                             <span>By: <a href="/user-profile.php?uid=<?=$qn->getAuthor()->getUserId(); ?>">
-                                <?= $qn->getAuthor()->getFirstName(); ?>
-                            </a></span>
-                    </div>
-
+                                <?= $qn->getAuthor()->getFirstName(); ?> </a>
+                            </span>
+                        </div>
                     </div>
                 <?php endforeach;?>
             </div>
