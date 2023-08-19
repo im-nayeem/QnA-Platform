@@ -3,7 +3,8 @@ require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
 
-$questionList = getAllQuestionList();
+$questionList = Question::getAllQuestionList();
+
 ?>
 
 <!DOCTYPE html>

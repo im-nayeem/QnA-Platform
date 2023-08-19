@@ -3,7 +3,27 @@ require_once $_SERVER['DOCUMENT_ROOT']."/account/model/user.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/model/question.php";
 require_once $_SERVER['DOCUMENT_ROOT']."/utility.php";
 
-$questionList = getAllQuestionList();
+if(!isset($_SESSION))
+    session_start();
+
+$questionList = [];
+
+try{
+    if(isset($_GET['q']))
+    {
+        if($_GET['q'] == 'not_answered')
+            $questionList = Question::getNotAnsweredQuestions();
+        elseif($_GET['q'] == 'top_answered')
+            $questionList = Question::getTopAnsweredQuestions();
+    }    
+    else
+        $questionList = Question::getAllQuestionList();
+}
+catch(Exception $e){
+    log_error($e);
+    header('Location: /error/error404.php');
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -25,10 +45,10 @@ $questionList = getAllQuestionList();
         <div class="main-content">
 
                 <div id="filter-btn">
-                    <a href="">All</a>
+                    <a href="./all-questions.php">All</a>
                     <a href="">Popular</a>
-                    <a href="">Top Answered</a>
-                    <a href="">Not Answered</a>
+                    <a href="./all-questions.php?q=top_answered">Top Answered</a>
+                    <a href="./all-questions.php?q=not_answered">Not Answered</a>
                 </div>
                 
             <div id="q-list">

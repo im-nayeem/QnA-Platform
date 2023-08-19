@@ -4,6 +4,8 @@ require_once $_SERVER["DOCUMENT_ROOT"]."/db.php";
 require_once $_SERVER["DOCUMENT_ROOT"]."/utility.php";
 require_once $_SERVER["DOCUMENT_ROOT"]."/model/qnAnswer.php";
 
+if(!isset($_SESSION))
+    session_start();
 
 class Question{
 
@@ -18,22 +20,20 @@ class Question{
 
     function __construct()
     {
-        try {
-            $arguments = func_get_args();
-            $numberOfArguments = func_num_args();
-            if(method_exists($this, $function = '__construct'.$numberOfArguments)) 
-            {
-                call_user_func_array(array($this, $function), $arguments);
+            try {
+                $arguments = func_get_args();
+                $numberOfArguments = func_num_args();
+                if(method_exists($this, $function = '__construct'.$numberOfArguments)) 
+                {
+                    call_user_func_array(array($this, $function), $arguments);
+                }
+            } catch (Exception $e) {
+                throw new Exception("Error Processing Request In Question __construct: ".$e, 0);
             }
-        } catch (Exception $e) {
-            throw new Exception("Error Processing Request In Question __construct: ".$e, 0);
-        }
-        
-        
     }
 
-    // construct a new question from $_POST 
-    function __construct0()
+    // construct a new question from $_POST
+    private function __construct0()
     {
         try{
 
@@ -46,33 +46,57 @@ class Question{
         }catch(Exception $e){
             throw new Exception("Error Processing Request In Question __construct0: ".$e, 0);
         }
-        
     }
 
-
     // retrieve question from database using question id
-    function __construct1($qid)
+    private function __construct1($qid)
     {
+        global $db;
         try{
-            global $db;
             $collections = $db->questions;
-            $qn = $collections->findOne([
+            $qnInfo = $collections->findOne([
                 '_id' => new MongoDB\BSON\ObjectId($qid)
             ]);
-            if($qn == null)
+            
+            if($qnInfo == null)
                 throw new Exception("Question Is Not Found!", 0);
             
-            $this->qid = $qn['_id'];
-            $this->title = $qn['title'];
-            $this->details = $qn['details'];
-            $this->timestamp = $qn['time'];
-            $this->answerCount = $qn['answer_count'];
-            $this->author = new User($qn['uid']);
-
+            $this->organizeData($qnInfo);
             $this->retrieveAnswerList($this->qid);
-            
-        }catch(Exception $e){
+        
+        } catch(Exception $e){
             throw new Exception("Error Processing Request In Question __construct1: ".$e, 0);
+        }
+    }
+    /**
+     * @param $qnInfo the array containing question info
+     * @param $arg takes any value(recommendation: pass null), used to separate constructor
+     */
+    private function __construct2($qnInfo, $arg)
+    {
+        try{
+            $this->organizeData($qnInfo);
+        }catch(Exception $e){
+            throw new Exception("Error Processing Request In Question __construct2: ".$e, 0);
+        }
+    }
+
+    /**
+     * Method to organize data in object
+     * @param $qnInfo the array containing question info
+     */
+    private function organizeData($qnInfo)
+    {
+        try{
+            $this->qid = $qnInfo['_id'];
+            $this->title = $qnInfo['title'];
+            $this->details = $qnInfo['details'];
+            $this->timestamp = $qnInfo['time'];
+            $this->answerCount = $qnInfo['answer_count'];
+            $this->author = new User($qnInfo['uid']);
+        }
+        catch(Exception $e){
+            throw new Exception("Error In organizeData() In Question: ".$e, 0);
         }
     }
 
@@ -141,6 +165,56 @@ class Question{
 
 
 /* ---------- Getters(public) ----------------- */
+
+    public static function getTopAnsweredQuestions(){
+        try{
+            global $db;
+            $collections = $db->questions->find([],[
+                'sort' => ['answer_count' => -1], 
+                'limit' => 50
+            ]);
+            $questionList = [];
+    
+            foreach($collections as $qn)
+                array_push($questionList, new Question($qn, null));
+            return $questionList;
+    
+        }catch(Exception $e){
+            throw new Exception("getTopAnsweredQuestion(): ".$e, 0);
+        }
+    }
+    public static function getNotAnsweredQuestions(){
+        try{
+            global $db;
+            $collections = $db->questions->find(['answer_count' => 0]);
+            $questionList = [];
+    
+            foreach($collections as $qn)
+                array_push($questionList, new Question($qn, null));
+            return $questionList;
+    
+        }catch(Exception $e){
+            throw new Exception("getTopAnsweredQuestion(): ".$e, 1);
+        }
+    }
+
+    public static function getAllQuestionList(){
+        try{
+            global $db;
+            $collections = $db->questions->find();
+            $questionList = [];
+    
+            foreach($collections as $qnInfo)
+            {
+                array_push($questionList, new Question($qnInfo, null));
+            }
+            return $questionList;
+    
+        }catch(Exception $e){
+            log_error($e);
+            exit;
+        }
+    }
     
     function getTitle(){
         return $this->title;

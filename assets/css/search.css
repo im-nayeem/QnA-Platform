@@ -1,0 +1,60 @@
+#filter-btn{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px solid rgb(255 250 250);
+    box-shadow: 0 0 2px rgba(172, 170, 170, 0.788);
+    margin-bottom: 10px;
+}
+#filter-btn a{
+    text-decoration: none;
+    color: rgb(100, 100, 100);
+    border: 1px solid whitesmoke;
+    border: none;
+    box-shadow: 0 0 3px rgba(151, 150, 150, 0.49);
+    padding: 5px;
+    font-weight: bold;
+}
+#filter-btn a:hover{
+    background-color: rgb(239, 239, 239);
+}
+.q{
+    border: 0.5px solid rgb(239, 238, 238);
+    box-shadow: 0 0 3px rgba(136, 136, 136, 0.49);
+    padding: 10px 10px 5px 10px;
+    margin-top: 5px;
+
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+.q h3 a{
+    text-decoration: none;
+    color: rgb(61, 61, 61);
+}
+.question-footer{
+    margin-top: 8px;
+    display: flex;
+    justify-content: space-between;
+    color: rgb(145, 145, 145);
+}
+.q-details{
+    font-size: medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #383838;
+}
+.q-details ol, .q-details ul{
+    margin-left: 15px;
+}
+.ans-details{
+    font-size: medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ans-details a{
+    text-decoration: none;
+    color: #383838;
+}
