@@ -18,7 +18,7 @@ if(!isset($_SESSION))
        
         <div class="search">
             <form class="search-form" action="/search.php" method="$_GET">
-                <input type="text" placeholder="Search" class="search-input" name="q">
+                <input type="text" placeholder="Search" class="search-input" name="query">
                 <button type="submit" class="search-button">Search</button>
               </form>
         </div>
@@ -37,7 +37,7 @@ if(!isset($_SESSION))
 
     <div class="float-search search">
             <form class="search-form" action="/search.php" method="$_GET">
-                <input type="text" placeholder="Search" class="search-input" name="q">
+                <input type="text" placeholder="Search" class="search-input" name="query">
                 <button type="submit" class="search-button">Search</button>
               </form>
     </div>

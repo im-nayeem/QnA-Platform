@@ -38,3 +38,23 @@
     justify-content: space-between;
     color: rgb(145, 145, 145);
 }
+.q-details{
+    font-size: medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #383838;
+}
+.q-details ol, .q-details ul{
+    margin-left: 15px;
+}
+.ans-details{
+    font-size: medium;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.ans-details a{
+    text-decoration: none;
+    color: #383838;
+}
