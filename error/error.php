@@ -44,7 +44,7 @@
 <body>
     <div class="container">
         <h2>Oops! An Error Has Occured.</h2>
-        <p><?=$_GET['error_msg'];?></p>
+        <p><?=$_REQUEST['error_msg'];?></p>
         <p>Return to <a href="/">home</a>.</p>
     </div>
 </body>

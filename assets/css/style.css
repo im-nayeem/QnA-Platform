@@ -178,6 +178,9 @@ footer {
   flex-direction: row;
   align-items: flex-end;
   justify-content: flex-end;
+}
+.user-profile a{
+  color: rgb(38, 38, 38);
   text-decoration: underline;
 }
 

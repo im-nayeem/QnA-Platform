@@ -13,7 +13,7 @@ if(($_SERVER["REQUEST_METHOD"] == "POST" and isset($_POST)) or isset($_SESSION['
    try{
     $answer = new Answer();
     $aid = $answer->storeInDatabase();
-    $page =  "/question-view?qid=".$answer->getQid()."#".$aid;
+    $page =  "/question-view.php?qid=".$answer->getQid()."#".$aid;
     header('Location: '.$page);
    } 
    catch(Exception $e){

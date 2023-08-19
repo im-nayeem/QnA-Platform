@@ -19,6 +19,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
         $answerList = $question->getAnswerList();
     }catch(Exception $e){
         log_error($e);
+        header('Location: /error/error404.php');
     }
 }
 ?>
@@ -79,7 +80,7 @@ if($_SERVER["REQUEST_METHOD"] == "GET" and isset($_GET))
                         <?= $ans->getText(); ?>
                         <div class="paragraph-footer">
                             <div class="time">
-                            <?php convertUTCToLocal($ans->getTimestamp());?>
+                                <?php convertUTCToLocal($ans->getTimestamp());?>
                             </div>
                             <div class="user-profile">
                                 <span>By: <a href="/user-profile.php?uid=<?= $ans->getAuthor()->getUserId(); ?>">

@@ -109,7 +109,7 @@ class Question{
         global $db;
        
         try{
-            $questionsCollection = $db->question;
+            $questionsCollection = $db->questions;
             $questionsCollection->updateOne(
                 ['_id' => new MongoDB\BSON\ObjectID($qid)],
                 ['$inc' => ['answer_count' => 1]],

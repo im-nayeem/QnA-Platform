@@ -16,8 +16,9 @@ $questionList = getAllQuestionList();
 
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="stylesheet" href="assets/css/all-question.css">
-
+    <script src="/assets/js/timeConverter.js"></script>
 </head>
+
 <body>
 
     <?php require "./includes/header.php";?>
@@ -31,27 +32,29 @@ $questionList = getAllQuestionList();
                 </div>
                 
             <div id="q-list">
-            <?php foreach($questionList as $qn): ?>
-                <div class="question q">
-                    
-                    <h3><a href="question-view.php?qid=<?=$qn->getQid();?>"> <?= $qn->getTitle(); ?> </a></h3>
-                    
-                    <div class="user-profile">
-                            <span>By: <a href="/user-profile.php?uid=<?=$qn->getAuthor()->getUserId(); ?>">
-                                <?= $qn->getAuthor()->getFirstName(); ?>
-                            </a></span>
-                    </div>
-
+                <?php foreach($questionList as $qn): ?>
+                    <div class="question q">
+                        
+                        <h3><a href="question-view.php?qid=<?=$qn->getQid();?>"> <?= $qn->getTitle(); ?> </a></h3>
+                        
+                        <div class="question-footer">
+                            <div class="time">
+                                <?= convertUTCToLocal($qn->getTimestamp()); ?> | Answered: <?=$qn->getAnswerCount();?>
+                            </div>
+                            <div class="user-profile">
+                                <span>By: <a href="/user-profile.php?uid=<?=$qn->getAuthor()->getUserId(); ?>">
+                                    <?= $qn->getAuthor()->getFirstName(); ?>
+                                </a></span>
+                            </div>
+                        </div>
                     </div>
                 <?php endforeach;?>
-               
-
             </div>
 
-        <div class="right-sidebar">
-            <!-- right-sidebar -->
         </div>
-    
+            <div class="right-sidebar">
+                <!-- right-sidebar -->
+            </div>
     </main>
 
     <?php require "./includes/footer.php";?>

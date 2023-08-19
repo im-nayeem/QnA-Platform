@@ -1,13 +1,19 @@
 const getTime = (time) => {
-    var utc = new Date(time);
-    var offset = utc.getTimezoneOffset();
-    var local = new Date(utc.getTime() - offset * 60000);
+    const options = {
+        year: '2-digit',
+        month: 'short',
+        day: '2-digit',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
 
+    const utc = new Date(time);
+    const offset = utc.getTimezoneOffset();
+    const local = new Date(utc.getTime() - offset * 60000);
+    
     // Format the local time
-    var localTimeFormatted = local.toLocaleString([], { year: 'numeric', month: 'numeric', day: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true });
-
-    // Remove the "GMT" and unnecessary strings
-    localTimeFormatted = localTimeFormatted.replace("GMT", "").replace("GMT+0000 (Coordinated Universal Time)", "");
-    // return localTimeFormatted;
-    document.write(localTimeFormatted);
+    let localTimeFormatted = local.toLocaleString('en-US', options);
+    
+    document.write(localTimeFormatted.replace(/,(?=[^,]*$)/, ' -'));
 }
